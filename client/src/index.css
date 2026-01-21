@@ -1,0 +1,219 @@
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Orbitron:wght@400;500;700;900&family=Space+Grotesk:wght@300;400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  font-size: 14px;
+  /* Light Mode - Soft Sky-Blue AI Aesthetic */
+  --background: 210 40% 98%;      /* Very soft blue-tinted white */
+  --foreground: 222 47% 11%;      /* Dark navy for text */
+
+  --primary: 221 83% 53%;         /* Modern AI Blue */
+  --primary-foreground: 210 40% 98%;
+
+  --secondary: 215 25% 27%;       /* Professional Slate Blue */
+  --secondary-foreground: 210 40% 98%;
+
+  --accent: 262 83% 58%;          /* Subtle Purple for highlights */
+  --accent-foreground: 210 40% 98%;
+
+  --muted: 210 40% 96%;           /* Soft sky-blue muted */
+  --muted-foreground: 215 16% 47%;
+  
+  --card: 0 0% 100%;              /* White cards */
+  --card-foreground: 222 47% 11%;
+  
+  --popover: 0 0% 100%;
+  --popover-foreground: 222 47% 11%;
+  
+  --border: 214 32% 91%;
+  --input: 214 32% 91%;
+  --ring: 221 83% 53%;
+
+  --destructive: 0 84% 60%;
+  --destructive-foreground: 210 40% 98%;
+
+  --radius: 0.75rem;               /* Slightly more rounded for modern feel */
+
+  --font-sans: 'Space Grotesk', sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+  --font-display: 'Orbitron', sans-serif;
+}
+
+.dark {
+  /* Cyberpunk Amber / Gold Theme */
+  --background: 35 30% 5%;
+  --foreground: 45 100% 96%;
+
+  --primary: 45 100% 50%;         /* Cyber Gold */
+  --primary-foreground: 35 30% 5%;
+
+  --secondary: 15 100% 50%;        /* Cyber Orange */
+  --secondary-foreground: 45 100% 96%;
+
+  --accent: 0 100% 50%;           /* Cyber Red */
+  --accent-foreground: 45 100% 96%;
+
+  --muted: 35 30% 10%;
+  --muted-foreground: 35 15% 65%;
+  
+  --card: 35 30% 7%;
+  --card-foreground: 45 100% 96%;
+  
+  --popover: 35 30% 6%;
+  --popover-foreground: 45 100% 96%;
+  
+  --border: 35 30% 15%;
+  --input: 35 30% 15%;
+  --ring: 45 100% 50%;
+
+  --destructive: 0 84% 60%;
+  --destructive-foreground: 45 100% 96%;
+}
+
+@keyframes matrix-fall {
+  0% { transform: translateY(-100%); opacity: 0; }
+  10% { opacity: 1; }
+  90% { opacity: 1; }
+  100% { transform: translateY(100vh); opacity: 0; }
+}
+
+.animate-matrix-fall {
+  animation: matrix-fall 10s linear infinite;
+}
+
+@layer base {
+  body {
+    @apply bg-background text-foreground antialiased font-sans selection:bg-primary/30 selection:text-primary;
+    background-attachment: fixed;
+  }
+
+  @media (min-width: 768px) {
+    body {
+      background-image: 
+        radial-gradient(circle at 50% 0%, hsl(var(--primary) / 0.05) 0%, transparent 50%),
+        radial-gradient(circle at 80% 20%, hsl(var(--accent) / 0.03) 0%, transparent 30%);
+    }
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-display);
+    @apply tracking-widest uppercase;
+  }
+
+  .text-glow-primary {
+    text-shadow: 0 0 10px hsla(var(--primary), 0.5), 0 0 20px hsla(var(--primary), 0.3);
+  }
+
+  .text-glow-white {
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.5), 0 0 20px rgba(255, 255, 255, 0.2);
+  }
+
+  /* Custom Scrollbar */
+  ::-webkit-scrollbar {
+    width: 8px;
+  }
+  ::-webkit-scrollbar-track {
+    @apply bg-background;
+  }
+  ::-webkit-scrollbar-thumb {
+    @apply bg-primary/20 rounded-full hover:bg-primary/40 transition-colors;
+  }
+}
+
+@layer utilities {
+  .text-glow {
+    text-shadow: 0 0 10px rgba(0, 243, 255, 0.5), 0 0 20px rgba(0, 243, 255, 0.3);
+  }
+  
+  .glass-panel {
+    @apply bg-background/60 backdrop-blur-md border border-white/10 shadow-xl;
+  }
+
+  .futuristic-button {
+    @apply relative overflow-hidden px-8 py-4 bg-background/10 backdrop-blur-md border border-primary/30 text-primary font-display font-bold rounded transition-all duration-500 hover:border-primary hover:text-white hover:shadow-[0_0_30px_rgba(0,243,255,0.4)];
+  }
+
+  .futuristic-button::before {
+    content: '';
+    @apply absolute top-0 -left-full w-full h-full bg-gradient-to-r from-transparent via-white/10 to-transparent transition-all duration-1000;
+  }
+
+  .futuristic-button:hover::before {
+    @apply left-full;
+  }
+
+  .neon-border {
+    box-shadow: 0 0 5px theme('colors.primary.DEFAULT'), inset 0 0 5px theme('colors.primary.DEFAULT');
+  }
+
+  .hover-card-glow {
+    @apply transition-all duration-300;
+  }
+  .hover-card-glow:hover {
+    box-shadow: 0 0 20px rgba(0, 243, 255, 0.15);
+    border-color: rgba(0, 243, 255, 0.4);
+    transform: translateY(-4px);
+  }
+}
+
+  .glitch {
+    position: relative;
+  }
+
+  .glitch::before,
+  .glitch::after {
+    content: attr(data-text);
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  .glitch:hover::before {
+    animation: glitchTop 0.25s linear infinite;
+    color: #ffb700;
+    opacity: 0.8;
+  }
+
+  .glitch:hover::after {
+    animation: glitchBottom 0.25s linear infinite;
+    color: #00ffe1;
+    opacity: 0.6;
+  }
+
+  @keyframes glitchTop {
+    0% { transform: translate(0); }
+    25% { transform: translate(-2px, -2px); }
+    50% { transform: translate(2px, -1px); }
+    75% { transform: translate(-1px, 2px); }
+    100% { transform: translate(0); }
+  }
+
+  @keyframes glitchBottom {
+    0% { transform: translate(0); }
+    25% { transform: translate(2px, 1px); }
+    50% { transform: translate(-2px, 2px); }
+    75% { transform: translate(1px, -1px); }
+    100% { transform: translate(0); }
+  }
+
+  .custom-scrollbar::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  .custom-scrollbar::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 10px;
+  }
+
+  .custom-scrollbar::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 10px;
+  }
+
+  .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.3);
+  }
